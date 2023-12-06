@@ -1,17 +1,15 @@
 
 require('dotenv/config');
+const {SlashCommandBuilder}= require('discord.js')
 const { REST, Routes} = require('discord.js');
 
-const commands=[
-    {
-        name: 'image-generate',
-        description: 'generate image from api',
-    },
-    {
-        name: 'ping',
-        description: 'pong!',
-    }
-];
+const commands = [
+    new SlashCommandBuilder()
+      .setName('image-generate')
+      .setDescription('This generates an image using a prompt provided by you')
+      .addStringOption(option => option.setName('prompt').setDescription('Describe what image you want to generate')),
+    // Add other commands as needed...
+  ].map(command => command.toJSON());
 
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN);
 (async () => {
