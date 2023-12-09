@@ -44,9 +44,15 @@ client.on('interactionCreate', async (interaction) => {
    
 
     console.log('Received prompt:', prompt);
-    if (prompt.toLowerCase().includes('sexual')) {
-      await interaction.editReply("I'm here to provide safe and friendly content. Unfortunately, I can't process requests for that kind of content. Is there anything else I can help you with?");
-    } else {
+    const forbiddenWords = ['sexual', 'porn', 'sex', 'kill', 'murder']; // Add more words as needed
+
+    const foundForbiddenWord = forbiddenWords.some((word) => prompt.startsWith(word));
+
+    if (foundForbiddenWord) {
+      await interaction.editReply(
+        "I'm here to provide safe and friendly content. Unfortunately, I can't process requests for that kind of content. Is there anything else I can help you with?"
+      );}
+    else {
       try {
       const response = await openai.images.generate({
         prompt: prompt,
