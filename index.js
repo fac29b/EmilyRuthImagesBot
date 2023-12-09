@@ -25,9 +25,13 @@ const client = new Client({
 
 // 
 
+
+
+
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
 
+ 
   
 
   if (interaction.commandName === 'image-generate') {
@@ -40,8 +44,10 @@ client.on('interactionCreate', async (interaction) => {
    
 
     console.log('Received prompt:', prompt);
-
-    try {
+    if (prompt.toLowerCase().includes('sexual')) {
+      await interaction.editReply("I'm here to provide safe and friendly content. Unfortunately, I can't process requests for that kind of content. Is there anything else I can help you with?");
+    } else {
+      try {
       const response = await openai.images.generate({
         prompt: prompt,
         n: 1,
@@ -69,6 +75,7 @@ client.on('interactionCreate', async (interaction) => {
         console.error('Error generating image:', error);
         await interaction.editReply({ content: 'Error generating image. Please try again later.' });
       }
+    }
     }
   }
 });
