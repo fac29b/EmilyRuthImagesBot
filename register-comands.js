@@ -7,7 +7,7 @@ const commands = [
     new SlashCommandBuilder()
       .setName('image-generate')
       .setDescription('This generates an image using a prompt provided by you')
-      .addStringOption(option => option.setName('prompt').setDescription('Describe what image you want to generate')),
+      .addStringOption(option => option.setName('prompt').setDescription('Start describing the image you would like to create.')),
     // Add other commands as needed...
   ].map(command => command.toJSON());
 

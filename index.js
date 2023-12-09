@@ -52,12 +52,26 @@ client.on('interactionCreate', async (interaction) => {
 
       const imageURL = response.data[0].url;
 
-      const embed = new EmbedBuilder()
-        .setColor('Blue')
-        .setTitle(`Here's your image of a \`\`\`${prompt}\`\`\``)
-        .setImage(imageURL)
-        .setTimestamp()
-        .setFooter({ text: 'Image Generator' });
+      const embed = new EmbedBuilder();
+
+// Assuming 'prompt' is the user's input
+const words = prompt.split(' ');
+const firstWord = words[0].toLowerCase();
+const firstChar = prompt.trim().toLowerCase()[0];
+
+if (firstWord === 'a' || firstWord === 'an' || firstWord === 'the'|| firstWord === 'one' || firstWord === 'two' || firstWord === 'three' || firstWord === 'four' || firstWord === 'five' || firstWord === 'six' || firstWord === 'seven' || firstWord === 'eight' || firstWord === 'nine' || firstWord === 'ten' || !isNaN(firstWord)) {
+  embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
+} else if (firstChar === 'a' || firstChar === 'e' || firstChar === 'i' || firstChar === 'o' || firstChar === 'u') {
+  embed.setTitle(`Here's your image of an \`\`\`${prompt}\`\`\``);
+} else {
+  embed.setTitle(`Here's your image of a \`\`\`${prompt}\`\`\``);
+}
+
+embed.setColor('Blue')
+  .setImage(imageURL)
+  .setTimestamp()
+  .setFooter({ text: 'Image Generator' });
+
 
       await interaction.editReply({ embeds: [embed] });
 
