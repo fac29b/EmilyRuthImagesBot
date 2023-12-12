@@ -3,6 +3,7 @@
 ## Overview
 
 This Discord chatbot uses the slash command /image-generate to connect with the OpenAI API and generate an image based on the user's prompt. 
+
 ![A screenshot of a discord interaction where the user (Emily Turner) uses that image-generate slash command and the bot responds 'Here is your picture of a plate of spaghetti' with a picture of that below](https://github.com/fac29b/EmilyRuthImagesBot/assets/49107443/890202b4-6ce5-4300-9258-e1b283d16811)
 
 ## Features:
