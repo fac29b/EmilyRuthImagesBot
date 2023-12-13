@@ -8,7 +8,6 @@ const commands = [
       .setName('image-generate')
       .setDescription('This generates an image using a prompt provided by you')
       .addStringOption(option => option.setName('prompt').setDescription('Start describing the image you would like to create.')),
-    // Add other commands as needed...
   ].map(command => command.toJSON());
 
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN);

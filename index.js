@@ -6,15 +6,11 @@ const {configuration, OpenAI}= require('openai');
 //const translate = require('translate-google');
 const commands = require("./register-comands");
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY // This is also the default, can be omitted
+  apiKey: process.env.OPENAI_API_KEY 
 });
 
-
-//const openai = new openAIAPI(configuration)
-//const openai = process.env.OPENAI_API_KEY;
-
-require('dotenv').config(); //initialize dotenv
-const Discord = require('discord.js'); //import discord.js
+require('dotenv').config(); 
+const Discord = require('discord.js'); 
 
 const client = new Client({
   intents: ['Guilds', 'GuildMembers', 'GuildMessages', 'MessageContent']
@@ -39,9 +35,15 @@ client.on('interactionCreate', async (interaction) => {
 
 
     console.log('Received prompt:', prompt);
-    const forbiddenWords = ['sexual', 'porn', 'sex', 'kill', 'murder']; // Add more words as needed
+    const forbiddenWords = [
+      'sexual', 'porn', 'sex', 'kill', 'murder',
+      'violence', 'drugs', 'alcohol', 'smoking',
+      'weapon', 'gambling', 'abuse', 'suicide', 'death', 'fuck', 'shit', 'gun', 'knife', 'crime', 'dead', 'ass', 'blood'
+    ]; 
 
-    const foundForbiddenWord = forbiddenWords.some((word) => prompt.startsWith(word));
+    const promptLowercase = prompt.toLowerCase();
+    const foundForbiddenWord = forbiddenWords.some((word) => promptLowercase.includes(word));
+    
 
     if (foundForbiddenWord) {
       await interaction.editReply(
@@ -68,10 +70,13 @@ client.on('interactionCreate', async (interaction) => {
 const words = prompt.split(' ');
 const firstWord = words[0].toLowerCase();
 const firstChar = prompt.trim().toLowerCase()[0];
+const lastChar = prompt.trim().toLowerCase().slice(-1);
 
-if (firstWord === 'a' || firstWord === 'an' || firstWord === 'the'|| firstWord === 'one' || firstWord === 'two' || firstWord === 'three' || firstWord === 'four' || firstWord === 'five' || firstWord === 'six' || firstWord === 'seven' || firstWord === 'eight' || firstWord === 'nine' || firstWord === 'ten' || !isNaN(firstWord)) {
+if (lastChar === 's') {
   embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
-} else if (firstChar === 'a' || firstChar === 'e' || firstChar === 'i' || firstChar === 'o' || firstChar === 'u') {
+} else if (['the', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'a', 'an'].includes(firstWord) || !isNaN(firstWord)) {
+  embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
+} else if (['a', 'e', 'i', 'o', 'u'].includes(firstChar)) {
   embed.setTitle(`Here's your image of an \`\`\`${prompt}\`\`\``);
 } else {
   embed.setTitle(`Here's your image of a \`\`\`${prompt}\`\`\``);
