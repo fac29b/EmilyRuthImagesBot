@@ -72,12 +72,12 @@ const firstWord = words[0].toLowerCase();
 const firstChar = prompt.trim().toLowerCase()[0];
 const lastChar = prompt.trim().toLowerCase().slice(-1);
 
-if (firstWord === 'a' || firstWord === 'an' || firstWord === 'the'|| firstWord === 'one' || firstWord === 'two' || firstWord === 'three' || firstWord === 'four' || firstWord === 'five' || firstWord === 'six' || firstWord === 'seven' || firstWord === 'eight' || firstWord === 'nine' || firstWord === 'ten' || !isNaN(firstWord)) {
+if (lastChar === 's') {
   embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
-} else if (firstChar === 'a' || firstChar === 'e' || firstChar === 'i' || firstChar === 'o' || firstChar === 'u') {
+} else if (['the', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'a', 'an'].includes(firstWord) || !isNaN(firstWord)) {
+  embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
+} else if (['a', 'e', 'i', 'o', 'u'].includes(firstChar)) {
   embed.setTitle(`Here's your image of an \`\`\`${prompt}\`\`\``);
-} else if (lastChar === 's') {
-  embed.setTitle(`Here's your image of \`\`\`${prompt}\`\`\``);
 } else {
   embed.setTitle(`Here's your image of a \`\`\`${prompt}\`\`\``);
 }
