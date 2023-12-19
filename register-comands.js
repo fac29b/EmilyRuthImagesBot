@@ -10,6 +10,8 @@ const commands = [
       .addStringOption(option => option.setName('prompt').setDescription('Start describing the image you would like to create.')),
   ].map(command => command.toJSON());
 
+  module.exports = {commands};
+
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN);
 (async () => {
     try {

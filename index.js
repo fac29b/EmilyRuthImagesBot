@@ -1,4 +1,5 @@
 require('dotenv/config');
+require('./register-comands.test')
 
 const {EmbedBuilder, Client}= require('discord.js')
 
